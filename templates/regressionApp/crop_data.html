@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+<head>
+    <title>Linear Regression</title>
+    <link rel="stylesheet" href="{%static "css/style.css" %}">
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/highcharts-more.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+</head>
+<body>
+    {% if price %}
+        <form method="POST" action='{%url "crop_data" %}'>
+            {% csrf_token %}
+            <select name='crop_name'>
+                {% for pr in price %}
+                    <option value="{{ pr.cropName }}">
+                        {{ pr.cropName }}
+                    </option>
+                {% endfor %}
+            </select>
+            <button type="submit">Predict</button>
+        </form>
+    {% endif %}
+
+
+
+    {% if prices and years and crop %}
+
+        <h1 id="title" style='display : none'> Predicted Crop Prices for the years 2017 - 2021</h1>
+        
+        {% for pr in prices %}
+            <div class="prices" style="display : none;">{{ pr.price }}</div>   
+        {% endfor %}
+        {% for yr in years %}
+            <div class="years" style="display : none;">{{ yr.year }}</div>   
+        {% endfor %}
+    
+    {% else %}
+        <h1>No data available</h1>
+    {% endif %}
+
+    <div id="crop-pred"></div>
+    <script src="{% static "libs/highcharts/charts.js" %}"></script>
+</body>
+</html>

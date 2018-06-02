@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+{%load staticfiles %}
+<html lang="en">
+<head>
+    <title>Linear Regression</title>
+</head>
+<body>
+    {% if price %}
+        <form method="POST" action='{%url "crop_data" %}'>
+            {% csrf_token %}
+            <select name='crop_name'>
+                {% for pr in price %}
+                    <option value="{{ pr.cropName }}">
+                        {{ pr.cropName }}
+                    </option>
+                {% endfor %}
+            </select>
+            <button type="submit", style="position:center">Predict</button>
+        </form>
+    {% endif %}
+
+</body>
+</html>
