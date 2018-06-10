@@ -19,6 +19,7 @@ from regressionApp import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^ols/$', views.ols, name='ols'),
     url(r'^$', views.index, name='index'),
     url(r'^crop_data/$', views.crop_data, name='crop_data')
 ]
